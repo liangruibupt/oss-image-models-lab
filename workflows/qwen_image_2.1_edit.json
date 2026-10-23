@@ -1,0 +1,79 @@
+{
+  "_comment": "Qwen-Image-2.1 image EDIT, ComfyUI API format. Node ids referenced by tests/prompts.jsonl: 6=edit instruction, 10=LoadImage(image), 3=KSampler(seed). Put the input image in ComfyUI/input/. Like the t2i template, confirm the exact Qwen edit/reference-latent nodes in your ComfyUI version and re-export via 'Save (API Format)' if they differ.",
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3.5_9b_qwen_image_2.1_pe_t2i_w4a8.safetensors",
+      "type": "qwen_image"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    }
+  },
+  "10": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "input.png"
+    }
+  },
+  "11": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": ["10", 0],
+      "vae": ["4", 0]
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "change the background to a sunny beach, keep the subject unchanged",
+      "clip": ["2", 0]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "lowres, blurry, artifacts",
+      "clip": ["2", 0]
+    }
+  },
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 42,
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 0.75,
+      "model": ["1", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["11", 0]
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["3", 0],
+      "vae": ["4", 0]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "qwen21_edit",
+      "images": ["8", 0]
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "_comment": "Qwen-Image-2.1 text-to-image, ComfyUI API format. Node ids referenced by tests/prompts.jsonl: 6=positive, 7=negative, 5=EmptyLatent(w/h), 3=KSampler(seed). Filenames match comfyui/models.manifest.txt. This is a starting template — open it once in the ComfyUI UI, confirm the node ids and the correct Qwen sampler/loader nodes for your ComfyUI version, then re-export via 'Save (API Format)' if anything differs.",
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3.5_9b_qwen_image_2.1_pe_t2i_w4a8.safetensors",
+      "type": "qwen_image"
+    }
+  },
+  "4": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    }
+  },
+  "5": {
+    "class_type": "EmptySD3LatentImage",
+    "inputs": {
+      "width": 1024,
+      "height": 1024,
+      "batch_size": 1
+    }
+  },
+  "6": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "a photorealistic landscape",
+      "clip": ["2", 0]
+    }
+  },
+  "7": {
+    "class_type": "CLIPTextEncode",
+    "inputs": {
+      "text": "lowres, blurry, watermark, text, deformed",
+      "clip": ["2", 0]
+    }
+  },
+  "3": {
+    "class_type": "KSampler",
+    "inputs": {
+      "seed": 42,
+      "steps": 8,
+      "cfg": 1.0,
+      "sampler_name": "euler",
+      "scheduler": "simple",
+      "denoise": 1.0,
+      "model": ["1", 0],
+      "positive": ["6", 0],
+      "negative": ["7", 0],
+      "latent_image": ["5", 0]
+    }
+  },
+  "8": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": ["3", 0],
+      "vae": ["4", 0]
+    }
+  },
+  "9": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "filename_prefix": "qwen21_t2i",
+      "images": ["8", 0]
+    }
+  }
+}

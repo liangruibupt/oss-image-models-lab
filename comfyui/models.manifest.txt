@@ -1,0 +1,24 @@
+# Qwen-Image-2.1 weights manifest — ComfyUI-ready single files.
+# Format:  REPO | FILE | DEST_SUBDIR   (DEST is under ComfyUI/models/)
+# Lines starting with # are ignored by setup-comfyui.sh.
+# Filenames verified against https://huggingface.co/Comfy-Org/Qwen-Image-2.1/tree/main (2026-10-23).
+#
+# ---- DEFAULT: INT8 ConvRot (best quality-per-VRAM, ~24GB class; the Comfy-Org packaged build) ----
+# On a 48GB L40S these load with plenty of headroom. For many teams INT8 ConvRot is visually
+# near-indistinguishable from BF16 and is what the official ComfyUI workflow ships with.
+Comfy-Org/Qwen-Image-2.1 | diffusion_models/qwen_image_2.1_turbo_int8_convrot.safetensors | diffusion_models
+Comfy-Org/Qwen-Image-2.1 | text_encoders/qwen3.5_9b_qwen_image_2.1_pe_t2i_w4a8.safetensors | text_encoders
+Comfy-Org/Qwen-Image-2.1 | vae/qwen_image_2.1_vae_bf16.safetensors | vae
+#
+# ---- OPTIONAL: Turbo LoRA (8-step fast sampling; already baked into the *_turbo_* file above,
+#      kept here if you want to apply it onto a non-turbo base) ----
+# Comfy-Org/Qwen-Image-2.1 | loras/qwen_image_2.1_turbo_lora_avg_rank_178_bf16.safetensors | loras
+#
+# ---- FULL BF16 (maximum quality, ~30GB VRAM) ----
+# The Comfy-Org repo publishes the INT8 build above; for the un-quantized BF16 diffusion weights
+# pull from the original Qwen repo and convert, or use the Diffusers pipeline instead of ComfyUI:
+#   Qwen/Qwen-Image-2.1   (full model, Diffusers QwenImage21Pipeline)  — see docs/MODELS.md
+#
+# ---- LOW-VRAM (GGUF, 6-8GB cards) ----
+# Not needed on g6e/L40S. If you ever downsize, use a GGUF quant via ComfyUI-GGUF, e.g.:
+#   city96 / QuantStack GGUF repos — qwen_image_2.1_Q5_K_M.gguf  (put in diffusion_models/)

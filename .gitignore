@@ -1,0 +1,38 @@
+# secrets / local config
+config.env
+*.pem
+*.ppk
+
+# model weights & large binaries (never commit)
+*.safetensors
+*.gguf
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.onnx
+models/
+ComfyUI/
+
+# generated outputs
+outputs/
+*.png
+*.jpg
+*.jpeg
+*.webp
+!docs/**/*.png
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# os / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# logs
+*.log

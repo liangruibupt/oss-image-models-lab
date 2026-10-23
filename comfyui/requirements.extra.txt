@@ -1,0 +1,6 @@
+# Extra Python deps on top of ComfyUI's own requirements.txt
+huggingface_hub[cli]>=0.25.0
+# GGUF loader (only needed if you switch to GGUF low-VRAM weights)
+gguf>=0.10.0
+# used by tests/run_prompts.py (stdlib urllib is enough, but requests is handy for debugging)
+requests>=2.31.0
