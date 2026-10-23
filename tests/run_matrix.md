@@ -1,26 +1,27 @@
-# 测试矩阵
+# 测试矩阵 — Vincent DESIGN 场景
 
-针对 Qwen-Image-2.1 的能力覆盖，每条对应 `prompts.jsonl` 里的一个用例。
+5 个高质量商业广告场景，每个默认跑 **4 个 seed**（`batch=4`），全部图像作为资产存入 `assets/` 并 checkin。详见 `tests/prompts.jsonl`。
 
-| id | 任务 | 考察点 | 期望产出 |
-|---|---|---|---|
-| `photoreal_portrait` | 文生图 | 写实质量基线、景深、光影 | 1024×1536 写实人像，细节锐利 |
-| `chinese_text_poster` | 文生图 | **中文**排版/文字渲染 | 海报，标题文字可辨认、无乱码 |
-| `english_text_signage` | 文生图 | 英文长文字、小字清晰度 | 菜单板，价格文字清晰 |
-| `transparent_sticker` | 文生图 | **原生透明 PNG (RGBA)** | 带真实 alpha 通道的贴纸，无白底 |
-| `complex_scene_2k` | 文生图 | 复杂场景 + **2K** 分辨率 | 2048×1152 赛博朋克夜市，构图完整 |
-| `product_shot` | 文生图 | 商业产品图 | 干净背景的产品渲染 |
-| `edit_bg_swap` | 编辑 | 保主体换背景 | 主体不变，背景替换 |
+| id | 场景 | 任务 | 尺寸 | 考察点 |
+|---|---|---|---|---|
+| `food_sandwich_bread` | 悬浮夹心烤面包 | t2i | 1024×1408 竖 | 美食质感、芝士拉丝、中文标题+书法体+装饰边框 |
+| `cosmetic_lancome_essence` | 兰蔻精华水动态广告 | t2i | 1024×1408 竖 | 液体丝绸环绕、金色背景、品牌文字排版 |
+| `food_hainan_milan` | 海南儋州米兰国潮插画 | t2i | 1024×1408 竖 | 国潮插画质感、竖排书法大字、木牌卖点文字 |
+| `character_three_view` | 超写实人物三视图 | t2i | 1408×1024 横 | 多视角角色设定表、配色板、细节模块布局 |
+| `portrait_knit_cardigan` | 居家休闲人像 | t2i | 1024×1408 竖 | 自然光写实人像、三分法、浅景深 |
 
-## 评估维度（人工打分建议 1–5）
-- **提示词遵从度**：是否画出了要求的内容
-- **文字正确性**：标题/价格等文字是否无误（中英文分别记）
-- **画质**：清晰度、伪影、解剖/结构合理性
-- **透明度**：`transparent_sticker` 的 alpha 是否干净（用带透明格的查看器确认）
-- **耗时**：`report.json` 里每条的 `seconds`（g6e/L40S BF16 的参考基线）
+## 运行
+实例上：
+```bash
+ONLY=food_sandwich_bread ./scripts/run-test.sh   # 先只跑场景1（4 张）
+./scripts/run-test.sh                              # 跑全部 5 个场景（20 张）
+```
+产出：`assets/<id>_seed<n>.png` + `assets/report.json`（每张耗时）。本地 `git add assets && git commit && git push` checkin。
 
-## 如何跑
-实例上：`./scripts/run-test.sh` → 结果与 `report.json` 落在 `/mnt/weights/outputs/<时间戳>/`，并同步到 S3（若配了 `S3_BUCKET`）。
+## 已知难点 / 评估重点
+- **中文长文字 + 书法体 + 精确小字排版**：Qwen-Image-2.1 对复杂中文标题常出错或变形。样图主要看**画面构图与质感**；文字类通常需要抽卡挑选，或在后期用设计软件叠字（Photoshop/Figma）。
+- **装饰边框（点线 + 桃花花瓣）**：模型不一定精确还原，视为"氛围"而非像素级约束。
+- **三视图（场景4）**：对布局一致性要求高，单次生成大概率不完美，适合作为参考稿。
 
-## 编辑用例的输入图
-`edit_bg_swap` 需要一张输入图：把图命名为 `input.png` 放进 ComfyUI 的 `input/` 目录（或改 overrides 里的文件名）。仓库默认不附带图片（见 `.gitignore`）。
+## 评估维度（人工 1–5 分）
+提示词遵从度 / 中文文字正确性 / 画质与质感 / 构图 / 耗时（见 report.json）。

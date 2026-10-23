@@ -21,6 +21,11 @@ outputs/
 *.jpeg
 *.webp
 !docs/**/*.png
+# committed sample assets (generated images we keep as deliverables)
+!assets/**/*.png
+!assets/**/*.jpg
+!assets/**/*.jpeg
+!assets/**/*.webp
 
 # python
 __pycache__/
