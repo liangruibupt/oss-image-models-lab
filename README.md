@@ -2,9 +2,26 @@
 
 一个用于**测试开源生图模型**的实验仓库，以 AWS GPU 实例按需启停的方式运行，面向"**要高质量、但不需要 7×24**"的使用场景。
 
-首发支持 **Qwen-Image-2.1**（7B 统一文生图 + 图像编辑，原生透明 PNG），架构可扩展到其它开源模型（FLUX、SD3.5、Qwen-Image 系列等）。
+首发支持 **Qwen-Image-2.1**（7B 统一文生图 + 图像编辑，原生透明 PNG）与 **Z-Image**（6B，Apache 2.0 可商用），并提供两者的**横向对比**（见下）。架构可扩展到其它开源模型（FLUX、SD3.5、Qwen-Image 系列等）。
 
-> ⚠️ **许可证提醒**：Qwen-Image-2.1 以 **Qwen Research License** 发布，**默认禁止商业用途**，商用需另向 Qwen 申请商业授权。本仓库仅用于研究/评估/内部测试。
+> ⚠️ **许可证提醒**：Qwen-Image-2.1 以 **Qwen Research License** 发布，**默认禁止商业用途**，商用需另向 Qwen 申请商业授权；**Z-Image 为 Apache 2.0，可免费商用**。本仓库代码仅用于研究/评估/内部测试。
+
+---
+
+## 🆚 模型对比：Z-Image vs Qwen-Image 2.1
+
+本仓库对两个开源生图模型做了**同场景、同 prompt、同 seed 的横向对比**，覆盖 8 个场景（美食/美妆/国潮/人物三视图/5 个人物特写），每模型每场景 4 个 seed，共 **64 张样图**存于 [`assets/`](assets/)。
+
+| | Z-Image | Qwen-Image 2.1 |
+|---|---|---|
+| 许可证 | **Apache 2.0 ✅ 可商用** | Qwen Research ❌ 商用需授权 |
+| 参数 / 显存 | 6B / 16GB 消费卡 | 7B+8B / BF16 ~30GB |
+| 原生透明·编辑·2K | ✗ ✗ ✗ | ✓ ✓ ✓ |
+| L40S 实测耗时 | ~13.3 s/张 | ~6.4 s/张 |
+
+**完整对比（规格表 + 实测数据 + 选型决策表）见 [`docs/COMPARISON.md`](docs/COMPARISON.md)。**
+
+一句话：要透明/编辑/2K 选 Qwen-Image 2.1；要可商用/低成本纯文生图选 Z-Image。
 
 ---
 
@@ -47,9 +64,11 @@ oss-image-models-lab/
 ├── tests/
 │   ├── prompts.jsonl          # 测试 prompt 清单（文生图 + 编辑）
 │   └── run_matrix.md          # 测试矩阵与期望产出
+├── assets/                    # 生成的样图资产（64 张，Qwen + Z-Image 并排对比）
 └── docs/
     ├── SETUP.md               # 从零到出图完整步骤
     ├── COST.md                # 成本明细与省钱清单
+    ├── COMPARISON.md          # 🆚 Z-Image vs Qwen-Image 2.1 模型对比
     └── MODELS.md              # 已测/待测开源模型与显存对照
 ```
 
@@ -86,7 +105,7 @@ cd ~/oss-image-models-lab && ./scripts/setup-comfyui.sh
 
 ## 支持的模型
 
-见 [`docs/MODELS.md`](docs/MODELS.md)。首发 Qwen-Image-2.1；欢迎按同样结构扩展其它开源模型。
+已测：**Qwen-Image-2.1** 与 **Z-Image**（含横向对比，见 [`docs/COMPARISON.md`](docs/COMPARISON.md)）。显存对照与扩展方式见 [`docs/MODELS.md`](docs/MODELS.md)；欢迎按同样结构扩展其它开源模型。
 
 ## 成本
 
