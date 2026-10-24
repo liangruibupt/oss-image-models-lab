@@ -19,7 +19,7 @@
 | 原生透明·编辑·2K | ✗ ✗ ✗ | ✓ ✓ ✓ |
 | L40S 实测耗时 | ~13.3 s/张 | ~6.4 s/张 |
 
-**完整对比（规格表 + 实测数据 + 选型决策表）见 [`docs/COMPARISON.md`](docs/COMPARISON.md)。**
+**完整对比（规格表 + 实测数据 + 选型决策表）见 [`docs/COMPARISON_zimage-vs-qwen-image-2.1.md`](docs/COMPARISON_zimage-vs-qwen-image-2.1.md)。**
 
 一句话：要透明/编辑/2K 选 Qwen-Image 2.1；要可商用/低成本纯文生图选 Z-Image。
 
@@ -68,7 +68,7 @@ oss-image-models-lab/
 └── docs/
     ├── SETUP.md               # 从零到出图完整步骤
     ├── COST.md                # 成本明细与省钱清单
-    ├── COMPARISON.md          # 🆚 Z-Image vs Qwen-Image 2.1 模型对比
+    ├── COMPARISON_zimage-vs-qwen-image-2.1.md   # 🆚 Z-Image vs Qwen-Image 2.1 模型对比
     └── MODELS.md              # 已测/待测开源模型与显存对照
 ```
 
@@ -105,7 +105,7 @@ cd ~/oss-image-models-lab && ./scripts/setup-comfyui.sh
 
 ## 支持的模型
 
-已测：**Qwen-Image-2.1** 与 **Z-Image**（含横向对比，见 [`docs/COMPARISON.md`](docs/COMPARISON.md)）。显存对照与扩展方式见 [`docs/MODELS.md`](docs/MODELS.md)；欢迎按同样结构扩展其它开源模型。
+已测：**Qwen-Image-2.1** 与 **Z-Image**（含横向对比，见 [`docs/COMPARISON_zimage-vs-qwen-image-2.1.md`](docs/COMPARISON_zimage-vs-qwen-image-2.1.md)）。显存对照与扩展方式见 [`docs/MODELS.md`](docs/MODELS.md)；欢迎按同样结构扩展其它开源模型。
 
 ## 成本
 

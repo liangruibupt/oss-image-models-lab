@@ -26,7 +26,7 @@
 - **显存**：16GB 消费卡即可跑；BF16 本地实测于 L40S。
 - **强项**：写实 + 中英双语文字 + 低显存/低成本；**不支持**原生透明、多参考图编辑、2K。
 - **来源**：`Tongyi-MAI/Z-Image-Turbo`（diffusers 0.41+ 自带 `ZImagePipeline`）。
-- **与 Qwen-Image 2.1 的完整对比见 [`COMPARISON.md`](COMPARISON.md)**（含同场景同 seed 的并排样图与本仓库实测耗时）。
+- **与 Qwen-Image 2.1 的完整对比见 [`COMPARISON_zimage-vs-qwen-image-2.1.md`](COMPARISON_zimage-vs-qwen-image-2.1.md)**（含同场景同 seed 的并排样图与本仓库实测耗时）。
 
 ## 待测 / 可扩展（欢迎按同结构添加）
 
