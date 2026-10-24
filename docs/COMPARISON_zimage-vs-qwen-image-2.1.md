@@ -61,6 +61,7 @@
 ## 一句话
 - **Z-Image = 可商用 + 轻量**，补上了 Qwen-Image 2.1 "不能免费商用" 的缺口；
 - **Qwen-Image 2.1 = 透明 + 编辑 + 2K**，这三样 Z-Image 做不到。
+- **文字渲染各有短板**（实测，见样图对比）：**中文长词/标语 Qwen 更准**（Z-Image 把"海南儋州米兰"和"欢迎品尝"写错），**英文品牌词 Z-Image 更准**（Qwen 把"LANCÔME"写成仿字）。**凡是文字类商业稿，两者都需人工校字或后期叠真字，不能直接交付。**
 - 对纯文生图的广告图：优先 Z-Image（可商用）；需要透明/编辑/2K 时用 Qwen。
 
 ## 样图对比（同 prompt · 同 seed=11）
@@ -77,10 +78,14 @@
 |---|---|
 | ![qwen](../assets/cosmetic_lancome_essence_seed11.png) | ![zimage](../assets/zimage_cosmetic_lancome_essence_seed11.png) |
 
+> 🔎 **观察**：瓶身**品牌英文名** Qwen-Image 2.1 写错（自造仿字，非 "LANCÔME"），**Z-Image 正确**。本例中英文品牌词 Z-Image 更可靠。
+
 ### 场景3 · 海南儋州米兰（国潮）
 | Qwen-Image 2.1 | Z-Image |
 |---|---|
 | ![qwen](../assets/food_hainan_milan_seed11.png) | ![zimage](../assets/zimage_food_hainan_milan_seed11.png) |
+
+> 🔎 **观察**：**中文长词/标语** Z-Image 出错——竖排主标题"海南儋州米兰"有误，底部"欢迎品尝"出现错别字；**Qwen-Image 2.1 的中文更准确**。本例与场景2 相反：中文排版 Qwen 更强，英文品牌词 Z-Image 更强。
 
 ### 场景4 · 人物三视图（角色设定）
 | Qwen-Image 2.1 | Z-Image |
