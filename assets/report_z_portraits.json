@@ -1,0 +1,62 @@
+[
+  {
+    "id": "portrait_bird",
+    "seed": 11,
+    "sec": 13.7
+  },
+  {
+    "id": "portrait_bird",
+    "seed": 22,
+    "sec": 12.9
+  },
+  {
+    "id": "portrait_bird",
+    "seed": 33,
+    "sec": 13.0
+  },
+  {
+    "id": "portrait_bird",
+    "seed": 44,
+    "sec": 13.1
+  },
+  {
+    "id": "portrait_jewelry",
+    "seed": 11,
+    "sec": 13.1
+  },
+  {
+    "id": "portrait_jewelry",
+    "seed": 22,
+    "sec": 13.1
+  },
+  {
+    "id": "portrait_jewelry",
+    "seed": 33,
+    "sec": 13.2
+  },
+  {
+    "id": "portrait_jewelry",
+    "seed": 44,
+    "sec": 13.3
+  },
+  {
+    "id": "portrait_ponytail",
+    "seed": 11,
+    "sec": 13.2
+  },
+  {
+    "id": "portrait_ponytail",
+    "seed": 22,
+    "sec": 13.3
+  },
+  {
+    "id": "portrait_ponytail",
+    "seed": 33,
+    "sec": 13.4
+  },
+  {
+    "id": "portrait_ponytail",
+    "seed": 44,
+    "sec": 13.2
+  }
+]

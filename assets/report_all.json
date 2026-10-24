@@ -1,98 +1,74 @@
 [
   {
-    "id": "cosmetic_lancome_essence",
+    "id": "portrait_bird",
     "seed": 11,
-    "sec": 12.6,
-    "path": "/home/ubuntu/assets/cosmetic_lancome_essence_seed11.png"
+    "sec": 7.4,
+    "path": "/home/ubuntu/assets/portrait_bird_seed11.png"
   },
   {
-    "id": "cosmetic_lancome_essence",
-    "seed": 22,
-    "sec": 5.8,
-    "path": "/home/ubuntu/assets/cosmetic_lancome_essence_seed22.png"
-  },
-  {
-    "id": "cosmetic_lancome_essence",
-    "seed": 33,
-    "sec": 5.8,
-    "path": "/home/ubuntu/assets/cosmetic_lancome_essence_seed33.png"
-  },
-  {
-    "id": "cosmetic_lancome_essence",
-    "seed": 44,
-    "sec": 5.8,
-    "path": "/home/ubuntu/assets/cosmetic_lancome_essence_seed44.png"
-  },
-  {
-    "id": "food_hainan_milan",
-    "seed": 11,
-    "sec": 5.9,
-    "path": "/home/ubuntu/assets/food_hainan_milan_seed11.png"
-  },
-  {
-    "id": "food_hainan_milan",
-    "seed": 22,
-    "sec": 5.9,
-    "path": "/home/ubuntu/assets/food_hainan_milan_seed22.png"
-  },
-  {
-    "id": "food_hainan_milan",
-    "seed": 33,
-    "sec": 6.0,
-    "path": "/home/ubuntu/assets/food_hainan_milan_seed33.png"
-  },
-  {
-    "id": "food_hainan_milan",
-    "seed": 44,
-    "sec": 6.0,
-    "path": "/home/ubuntu/assets/food_hainan_milan_seed44.png"
-  },
-  {
-    "id": "character_three_view",
-    "seed": 11,
-    "sec": 6.0,
-    "path": "/home/ubuntu/assets/character_three_view_seed11.png"
-  },
-  {
-    "id": "character_three_view",
+    "id": "portrait_bird",
     "seed": 22,
     "sec": 6.0,
-    "path": "/home/ubuntu/assets/character_three_view_seed22.png"
+    "path": "/home/ubuntu/assets/portrait_bird_seed22.png"
   },
   {
-    "id": "character_three_view",
+    "id": "portrait_bird",
     "seed": 33,
     "sec": 5.9,
-    "path": "/home/ubuntu/assets/character_three_view_seed33.png"
+    "path": "/home/ubuntu/assets/portrait_bird_seed33.png"
   },
   {
-    "id": "character_three_view",
-    "seed": 44,
-    "sec": 6.0,
-    "path": "/home/ubuntu/assets/character_three_view_seed44.png"
-  },
-  {
-    "id": "portrait_knit_cardigan",
-    "seed": 11,
-    "sec": 6.0,
-    "path": "/home/ubuntu/assets/portrait_knit_cardigan_seed11.png"
-  },
-  {
-    "id": "portrait_knit_cardigan",
-    "seed": 22,
-    "sec": 6.0,
-    "path": "/home/ubuntu/assets/portrait_knit_cardigan_seed22.png"
-  },
-  {
-    "id": "portrait_knit_cardigan",
-    "seed": 33,
-    "sec": 6.0,
-    "path": "/home/ubuntu/assets/portrait_knit_cardigan_seed33.png"
-  },
-  {
-    "id": "portrait_knit_cardigan",
+    "id": "portrait_bird",
     "seed": 44,
     "sec": 6.1,
-    "path": "/home/ubuntu/assets/portrait_knit_cardigan_seed44.png"
+    "path": "/home/ubuntu/assets/portrait_bird_seed44.png"
+  },
+  {
+    "id": "portrait_jewelry",
+    "seed": 11,
+    "sec": 6.0,
+    "path": "/home/ubuntu/assets/portrait_jewelry_seed11.png"
+  },
+  {
+    "id": "portrait_jewelry",
+    "seed": 22,
+    "sec": 6.0,
+    "path": "/home/ubuntu/assets/portrait_jewelry_seed22.png"
+  },
+  {
+    "id": "portrait_jewelry",
+    "seed": 33,
+    "sec": 6.1,
+    "path": "/home/ubuntu/assets/portrait_jewelry_seed33.png"
+  },
+  {
+    "id": "portrait_jewelry",
+    "seed": 44,
+    "sec": 6.1,
+    "path": "/home/ubuntu/assets/portrait_jewelry_seed44.png"
+  },
+  {
+    "id": "portrait_ponytail",
+    "seed": 11,
+    "sec": 6.1,
+    "path": "/home/ubuntu/assets/portrait_ponytail_seed11.png"
+  },
+  {
+    "id": "portrait_ponytail",
+    "seed": 22,
+    "sec": 6.1,
+    "path": "/home/ubuntu/assets/portrait_ponytail_seed22.png"
+  },
+  {
+    "id": "portrait_ponytail",
+    "seed": 33,
+    "sec": 6.1,
+    "path": "/home/ubuntu/assets/portrait_ponytail_seed33.png"
+  },
+  {
+    "id": "portrait_ponytail",
+    "seed": 44,
+    "sec": 6.1,
+    "path": "/home/ubuntu/assets/portrait_ponytail_seed44.png"
   }
 ]
