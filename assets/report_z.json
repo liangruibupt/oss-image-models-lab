@@ -1,0 +1,102 @@
+[
+  {
+    "id": "food_sandwich_bread",
+    "seed": 11,
+    "sec": 13.3
+  },
+  {
+    "id": "food_sandwich_bread",
+    "seed": 22,
+    "sec": 12.8
+  },
+  {
+    "id": "food_sandwich_bread",
+    "seed": 33,
+    "sec": 12.9
+  },
+  {
+    "id": "food_sandwich_bread",
+    "seed": 44,
+    "sec": 13.0
+  },
+  {
+    "id": "cosmetic_lancome_essence",
+    "seed": 11,
+    "sec": 12.9
+  },
+  {
+    "id": "cosmetic_lancome_essence",
+    "seed": 22,
+    "sec": 12.9
+  },
+  {
+    "id": "cosmetic_lancome_essence",
+    "seed": 33,
+    "sec": 13.0
+  },
+  {
+    "id": "cosmetic_lancome_essence",
+    "seed": 44,
+    "sec": 13.1
+  },
+  {
+    "id": "food_hainan_milan",
+    "seed": 11,
+    "sec": 13.5
+  },
+  {
+    "id": "food_hainan_milan",
+    "seed": 22,
+    "sec": 13.5
+  },
+  {
+    "id": "food_hainan_milan",
+    "seed": 33,
+    "sec": 13.5
+  },
+  {
+    "id": "food_hainan_milan",
+    "seed": 44,
+    "sec": 13.5
+  },
+  {
+    "id": "character_three_view",
+    "seed": 11,
+    "sec": 13.7
+  },
+  {
+    "id": "character_three_view",
+    "seed": 22,
+    "sec": 13.7
+  },
+  {
+    "id": "character_three_view",
+    "seed": 33,
+    "sec": 13.8
+  },
+  {
+    "id": "character_three_view",
+    "seed": 44,
+    "sec": 13.8
+  },
+  {
+    "id": "portrait_knit_cardigan",
+    "seed": 11,
+    "sec": 13.4
+  },
+  {
+    "id": "portrait_knit_cardigan",
+    "seed": 22,
+    "sec": 13.4
+  },
+  {
+    "id": "portrait_knit_cardigan",
+    "seed": 33,
+    "sec": 13.5
+  },
+  {
+    "id": "portrait_knit_cardigan",
+    "seed": 44,
+    "sec": 13.5
+  }
+]
