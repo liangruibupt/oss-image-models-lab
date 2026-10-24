@@ -63,6 +63,52 @@
 - **Qwen-Image 2.1 = 透明 + 编辑 + 2K**，这三样 Z-Image 做不到。
 - 对纯文生图的广告图：优先 Z-Image（可商用）；需要透明/编辑/2K 时用 Qwen。
 
+## 样图对比（同 prompt · 同 seed=11）
+
+每行左为 **Qwen-Image 2.1**，右为 **Z-Image**，均 seed=11、BF16、8 步。完整 8 场景 × 4 seed 的全部样图见仓库 [`assets/`](../assets/)。
+
+### 场景1 · 悬浮夹心烤面包
+| Qwen-Image 2.1 | Z-Image |
+|---|---|
+| ![qwen](../assets/food_sandwich_bread_seed11.png) | ![zimage](../assets/zimage_food_sandwich_bread_seed11.png) |
+
+### 场景2 · 兰蔻精华水动态广告
+| Qwen-Image 2.1 | Z-Image |
+|---|---|
+| ![qwen](../assets/cosmetic_lancome_essence_seed11.png) | ![zimage](../assets/zimage_cosmetic_lancome_essence_seed11.png) |
+
+### 场景3 · 海南儋州米兰（国潮）
+| Qwen-Image 2.1 | Z-Image |
+|---|---|
+| ![qwen](../assets/food_hainan_milan_seed11.png) | ![zimage](../assets/zimage_food_hainan_milan_seed11.png) |
+
+### 场景4 · 人物三视图（角色设定）
+| Qwen-Image 2.1 | Z-Image |
+|---|---|
+| ![qwen](../assets/character_three_view_seed11.png) | ![zimage](../assets/zimage_character_three_view_seed11.png) |
+
+### 场景5 · 居家休闲人像
+| Qwen-Image 2.1 | Z-Image |
+|---|---|
+| ![qwen](../assets/portrait_knit_cardigan_seed11.png) | ![zimage](../assets/zimage_portrait_knit_cardigan_seed11.png) |
+
+### 人物特写1 · 持小白鸟
+| Qwen-Image 2.1 | Z-Image |
+|---|---|
+| ![qwen](../assets/portrait_bird_seed11.png) | ![zimage](../assets/zimage_portrait_bird_seed11.png) |
+
+### 人物特写2 · 棕色饰品棚拍
+| Qwen-Image 2.1 | Z-Image |
+|---|---|
+| ![qwen](../assets/portrait_jewelry_seed11.png) | ![zimage](../assets/zimage_portrait_jewelry_seed11.png) |
+
+### 人物特写3 · 高马尾米色毛衣
+| Qwen-Image 2.1 | Z-Image |
+|---|---|
+| ![qwen](../assets/portrait_ponytail_seed11.png) | ![zimage](../assets/zimage_portrait_ponytail_seed11.png) |
+
+> 观察要点：文字/排版类场景（场景1-3）看中文标题与装饰边框的准确度；人物类看面部、发丝、光影与姿态自然度。图是同 seed 的单次采样，非精选，仅作直观参考；换 seed 结果会变。
+
 ## 复现
 ```bash
 # Z-Image（diffusers 0.41+ 自带 ZImagePipeline，Tongyi-MAI/Z-Image-Turbo）
