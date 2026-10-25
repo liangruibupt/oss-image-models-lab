@@ -1,0 +1,42 @@
+[
+  {
+    "id": "cosmetic_lancome_essence",
+    "seed": 11,
+    "sec": 46.8
+  },
+  {
+    "id": "cosmetic_lancome_essence",
+    "seed": 22,
+    "sec": 47.0
+  },
+  {
+    "id": "cosmetic_lancome_essence",
+    "seed": 33,
+    "sec": 47.9
+  },
+  {
+    "id": "cosmetic_lancome_essence",
+    "seed": 44,
+    "sec": 46.8
+  },
+  {
+    "id": "food_hainan_milan",
+    "seed": 11,
+    "sec": 48.3
+  },
+  {
+    "id": "food_hainan_milan",
+    "seed": 22,
+    "sec": 48.1
+  },
+  {
+    "id": "food_hainan_milan",
+    "seed": 33,
+    "sec": 47.6
+  },
+  {
+    "id": "food_hainan_milan",
+    "seed": 44,
+    "sec": 48.0
+  }
+]

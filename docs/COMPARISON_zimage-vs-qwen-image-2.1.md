@@ -61,12 +61,12 @@
 ## 一句话
 - **Z-Image = 可商用 + 轻量**，补上了 Qwen-Image 2.1 "不能免费商用" 的缺口；
 - **Qwen-Image 2.1 = 透明 + 编辑 + 2K**，这三样 Z-Image 做不到。
-- **文字渲染各有短板**（实测，见样图对比）：**中文长词/标语 Qwen 更准**（Z-Image 把"海南儋州米兰"和"欢迎品尝"写错），**英文品牌词 Z-Image 更准**（Qwen 把"LANCÔME"写成仿字）。**凡是文字类商业稿，两者都需人工校字或后期叠真字，不能直接交付。**
+- **文字渲染各有短板（Turbo 与完整模型实测一致）**：**中文长词/标语 Qwen 更准**（Z-Image 把"海南儋州米兰"和"欢迎品尝"写错），**英文品牌词 Z-Image 更准**（Qwen 把"LANCÔME"写成仿字）。升到完整模型（40/30 步 + cfg≈4）改善了清晰度但**没改变谁对谁错**（见 [full-vs-full 复核](#完整模型档位复核full-vs-full)）。**凡是文字类商业稿，两者都需人工校字或后期叠真字，不能直接交付。**
 - 对纯文生图的广告图：优先 Z-Image（可商用）；需要透明/编辑/2K 时用 Qwen。
 
 ## 样图对比（同 prompt · 同 seed=11）
 
-每行左为 **Qwen-Image 2.1**，右为 **Z-Image**，均 seed=11、BF16、8 步。完整 8 场景 × 4 seed 的全部样图见仓库 [`assets/`](../assets/)。
+每行左为 **Qwen-Image 2.1**，右为 **Z-Image**，均 seed=11、BF16、**8 步**。两侧**同为 Turbo 档**（Qwen-Image-2.1-Turbo vs Z-Image-Turbo），同 prompt、同 seed、同尺寸——apple-to-apple。完整 8 场景 × 4 seed 的全部样图见仓库 [`assets/`](../assets/)；两个文字争议场景的"完整模型档"复核见下方 [full-vs-full 小节](#完整模型档位复核full-vs-full)。
 
 ### 场景1 · 悬浮夹心烤面包
 | Qwen-Image 2.1 | Z-Image |
@@ -78,14 +78,14 @@
 |---|---|
 | ![qwen](../assets/cosmetic_lancome_essence_seed11.png) | ![zimage](../assets/zimage_cosmetic_lancome_essence_seed11.png) |
 
-> 🔎 **观察**：瓶身**品牌英文名** Qwen-Image 2.1 写错（自造仿字，非 "LANCÔME"），**Z-Image 正确**。本例中英文品牌词 Z-Image 更可靠。
+> 🔎 **观察（Turbo 档）**：瓶身**品牌英文名** Qwen-Image 2.1 写错（自造仿字，非 "LANCÔME"），**Z-Image 正确**。本例中英文品牌词 Z-Image 更可靠。**此结论在完整模型上同样成立**——见下方 [「完整模型档位复核（full-vs-full）」](#完整模型档位复核full-vs-full)。
 
 ### 场景3 · 海南儋州米兰（国潮）
 | Qwen-Image 2.1 | Z-Image |
 |---|---|
 | ![qwen](../assets/food_hainan_milan_seed11.png) | ![zimage](../assets/zimage_food_hainan_milan_seed11.png) |
 
-> 🔎 **观察**：**中文长词/标语** Z-Image 出错——竖排主标题"海南儋州米兰"有误，底部"欢迎品尝"出现错别字；**Qwen-Image 2.1 的中文更准确**。本例与场景2 相反：中文排版 Qwen 更强，英文品牌词 Z-Image 更强。
+> 🔎 **观察（Turbo 档）**：**中文长词/标语** Z-Image 出错——竖排主标题"海南儋州米兰"有误（如"海南偷米林"），底部"欢迎品尝"出现错别字（如"欢迎晤尝"）；**Qwen-Image 2.1 的中文准确**。本例与场景2 相反：中文排版 Qwen 更强，英文品牌词 Z-Image 更强。**此结论在完整模型上同样成立**——见下方 [「完整模型档位复核（full-vs-full）」](#完整模型档位复核full-vs-full)。
 
 ### 场景4 · 人物三视图（角色设定）
 | Qwen-Image 2.1 | Z-Image |
@@ -114,9 +114,42 @@
 
 > 观察要点：文字/排版类场景（场景1-3）看中文标题与装饰边框的准确度；人物类看面部、发丝、光影与姿态自然度。图是同 seed 的单次采样，非精选，仅作直观参考；换 seed 结果会变。
 
+## 完整模型档位复核（full-vs-full）
+
+上面的样图对比是 **Turbo vs Turbo**（8 步，apple-to-apple）。有人会问："Turbo 文字糊，换成完整模型（更多步数 + cfg≈4）是不是就不糊了？" 为此我们把两个有文字争议的场景（兰蔻 / 海南儋州米兰）**两个模型都升到完整档**重跑，**同 seed（11/22/33/44）、同尺寸 1024×1408、同 BF16**，做一次严格的 full-vs-full 复核。
+
+> 档位（已锁定，见 `scripts/gen.py`）：**Qwen-Image-2.1 完整** = 40 步 / `true_cfg_scale=4.0`（~50 s/张）；**Z-Image 完整** = 30 步 / `guidance_scale=4.0`（~47 s/张）。下面每张均取各自 4 seed 中**文字最准的一张**。
+
+### 复核场景A · 兰蔻（英文品牌词）
+| Qwen-Image 2.1 完整（40步） | Z-Image 完整（30步） |
+|---|---|
+| ![qwenfull](../assets/fix/qwenfull_cosmetic_lancome_essence_seed11.png) | ![zfull](../assets/fix/zfull_cosmetic_lancome_essence_seed33.png) |
+
+> 🔎 **结论**：**升到完整模型也救不了 Qwen 的英文品牌词**——4 个 seed 瓶身分别写成 `LLCOME / LLOCOME / LLOCOME / LLCOME`，无一正确。**Z-Image 完整正确渲染 "LANCÔME"**（含 ô，seed 33 最干净）。英文品牌词 Z-Image 胜，与 Turbo 档一致。
+
+### 复核场景B · 海南儋州米兰（中文长词）
+| Qwen-Image 2.1 完整（40步） | Z-Image 完整（30步） |
+|---|---|
+| ![qwenfull](../assets/fix/qwenfull_food_hainan_milan_seed33.png) | ![zfull](../assets/fix/zfull_food_hainan_milan_seed11.png) |
+
+> 🔎 **结论**：**升到完整模型也救不了 Z-Image 的中文长标题**——4 个 seed 竖排主标题分别糊成"海潮米兰 / (乱码) / (乱码) / 海借…"，均不正确（底部"欢迎品尝"倒是都对了）。**Qwen 完整正确渲染"海南儋州米兰"+"欢迎品尝"**（seed 33；木牌小字"分量"仍误作"分俞"，属次要副文）。中文长词 Qwen 胜，与 Turbo 档一致。
+
+### 复核小结
+| 文字类型 | Turbo 档结论 | 完整档结论 | 是否一致 |
+|---|---|---|---|
+| 英文品牌词（LANCÔME） | Z-Image 准，Qwen 错 | Z-Image 准，Qwen **仍**错 | ✅ 一致 |
+| 中文长标题（海南儋州米兰） | Qwen 准，Z-Image 错 | Qwen 准，Z-Image **仍**错 | ✅ 一致 |
+
+**所以"换完整模型就能修好文字"并不成立**：各自的文字短板是**模型能力级**的，提高步数 / cfg 改善了清晰度与画质，但**没有改变谁对谁错**。结论依旧那句铁律——**文字类商业稿两者都必须人工校字或后期叠真字，不能直接交付**；选型时按主文字语种选（英文品牌→Z-Image，中文长标语→Qwen）。全部复核样图见 [`assets/fix/`](../assets/fix/)。
+
 ## 复现
 ```bash
-# Z-Image（diffusers 0.41+ 自带 ZImagePipeline，Tongyi-MAI/Z-Image-Turbo）
-# Qwen（QwenImage21Pipeline，Qwen/Qwen-Image-2.1-Turbo）
-# 两者均 BF16 on L40S，8 步，见本仓库生成脚本与 tests/prompts.jsonl
+# —— Turbo 档（样图对比用）——
+# Z-Image : ZImagePipeline, Tongyi-MAI/Z-Image-Turbo , 8 步 , guidance_scale=1.0
+# Qwen    : QwenImage21Pipeline, Qwen/Qwen-Image-2.1-Turbo , 8 步 , true_cfg_scale=1.0
+# —— 完整档（full-vs-full 复核用）——
+# Z-Image : ZImagePipeline, Tongyi-MAI/Z-Image , 30 步 , guidance_scale=4.0
+# Qwen    : QwenImage21Pipeline, Qwen/Qwen-Image-2.1 , 40 步 , true_cfg_scale=4.0
+# 两档均 BF16 on L40S；参数锁定在 scripts/gen.py，prompts 见 tests/prompts.jsonl
+# 例：python scripts/gen.py --model qwen-full --only cosmetic_lancome_essence,food_hainan_milan --seeds 11,22,33,44 --out assets/fix/ --prefix qwenfull
 ```

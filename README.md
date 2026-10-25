@@ -12,7 +12,7 @@
 
 ## 🆚 模型对比：Z-Image vs Qwen-Image 2.1
 
-本仓库对两个开源生图模型做了**同场景、同 prompt、同 seed 的横向对比**，覆盖 8 个场景（美食/美妆/国潮/人物三视图/5 个人物特写），每模型每场景 4 个 seed，共 **64 张样图**存于 [`assets/`](assets/)。
+本仓库对两个开源生图模型做了**同场景、同 prompt、同 seed 的横向对比**，覆盖 8 个场景（美食/美妆/国潮/人物三视图/5 个人物特写），每模型每场景 4 个 seed，共 **64 张样图**存于 [`assets/`](assets/)。主对比为 **Turbo vs Turbo**（均 8 步，apple-to-apple，含出图速度）；另对两个文字争议场景（兰蔻 / 海南儋州米兰）做了 **full-vs-full 完整模型复核**（同 seed，见 [`assets/fix/`](assets/fix/)），结论与 Turbo 一致。
 
 | | Z-Image | Qwen-Image 2.1 |
 |---|---|---|

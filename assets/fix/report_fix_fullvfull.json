@@ -1,0 +1,9 @@
+{
+  "note": "Full-vs-full re-render of the two text-dispute scenes, same seeds/size/dtype as the Turbo comparison. L40S BF16.",
+  "qwen_full": {"repo": "Qwen/Qwen-Image-2.1", "steps": 40, "true_cfg_scale": 4.0, "sec_per_img": "~49-64"},
+  "z_full":    {"repo": "Tongyi-MAI/Z-Image", "steps": 30, "guidance_scale": 4.0, "sec_per_img": "~47-48"},
+  "winners": {
+    "cosmetic_lancome_essence": {"text": "LANCÔME", "correct_model": "z-full", "best_seed": 33, "qwen_full": "wrong on all 4 seeds (LLCOME/LLOCOME)"},
+    "food_hainan_milan": {"text": "海南儋州米兰 + 欢迎品尝", "correct_model": "qwen-full", "best_seed": 33, "z_full": "title mangled on all 4 seeds"}
+  }
+}
