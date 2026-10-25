@@ -1,5 +1,7 @@
 # OSS Image Models Lab
 
+> 🤖 **AI task worker / agent：动手前先读 [`AGENTS.md`](AGENTS.md) 和 [`docs/RUNBOOK.md`](docs/RUNBOOK.md)**，里面是已验证的区域/AMI/模型 id/生成参数和踩坑清单。用 `scripts/launch.py` → `scripts/box_env.sh` → `scripts/gen.py` → `scripts/teardown.py` 这套验证过的流程，**不要重新猜测或从零试错**。
+
 一个用于**测试开源生图模型**的实验仓库，以 AWS GPU 实例按需启停的方式运行，面向"**要高质量、但不需要 7×24**"的使用场景。
 
 首发支持 **Qwen-Image-2.1**（7B 统一文生图 + 图像编辑，原生透明 PNG）与 **Z-Image**（6B，Apache 2.0 可商用），并提供两者的**横向对比**（见下）。架构可扩展到其它开源模型（FLUX、SD3.5、Qwen-Image 系列等）。
