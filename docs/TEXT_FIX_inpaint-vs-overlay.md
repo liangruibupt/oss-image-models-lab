@@ -36,6 +36,16 @@
 - **但左罐仍出现 `ABSCPEX`／`PUE` 之类的乱码片段，下方小字依旧不可读。**
   即：inpaint 把乱码换成了"融合更好的新乱码"，**没有**真正拼对英文。
 
+**实测效果图（兰蔻场景，左＝原图乱码，中＝mask，右＝inpaint 重绘后）：**
+
+| 原图（Z-full seed33，瓶身英文乱码） | inpaint mask（白＝重绘区） | inpaint 重绘后（seed33） |
+|:---:|:---:|:---:|
+| <img src="../assets/fix/zfull_cosmetic_lancome_essence_seed33.png" width="260"> | <img src="../assets/fix/inpaint/lancome_mask.png" width="260"> | <img src="../assets/fix/inpaint/lancome_inpaint_s33.png" width="260"> |
+
+> 对比右两张瓶身文字区：重绘后文字确实**贴合瓶身曲面、融合更自然**，但放大看左罐仍是
+> `ABSCPEX`/`PUE` 等**乱码**、下方小字不可读——模型没有把英文拼对。另见
+> `lancome_inpaint_s11.png` / `lancome_inpaint_s22.png`，三个 seed 结论一致。
+
 > Qwen-Image-2.1 侧：diffusers 0.41 的 `QwenImageInpaintPipeline` 需要 `tokenizer` 组件，
 > 而 2.1 架构用的是 `processor`，二者**不兼容**，无法直接对 2.1 做 mask inpaint；
 > 2.1 的编辑能力在独立的 `Qwen-Image-Edit` 模型里（另一套权重，已不是被测模型本身）。
@@ -61,6 +71,20 @@
   （`LANCÔME / ABSOLUE / L'EXTRAIT / THE ROSE LOTION / 规格`），
   但因瓶身是**光滑曲面**，一刀切的矩形补丁会留下可见痕迹——
   **说明叠真字在曲面瓶身上要无痕，必须在设计软件里按瓶身轮廓做蒙版+透视，而非脚本矩形补丁。**
+
+**实测效果图（左＝原图错误，右＝叠真字后）：**
+
+海南木牌（平面纸面 —— 叠字干净 ✅，「分俞十足」已改为「分量十足」）：
+
+| 原图（Qwen-full seed33，木牌「分**俞**十足」） | 叠真字后（「分量十足」） |
+|:---:|:---:|
+| <img src="../assets/fix/qwenfull_food_hainan_milan_seed33.png" width="300"> | <img src="../assets/fix/overlay/hainan_overlay.png" width="300"> |
+
+兰蔻瓶身（光滑曲面 —— 文字 100% 正确 ✅，但矩形补丁痕迹可见 ⚠️）：
+
+| 原图（Z-full seed33，瓶身英文乱码） | 叠真字后（文字正确，补丁有痕） |
+|:---:|:---:|
+| <img src="../assets/fix/zfull_cosmetic_lancome_essence_seed33.png" width="300"> | <img src="../assets/fix/overlay/lancome_overlay.png" width="300"> |
 
 ## 对商业文字稿的建议（铁律不变）
 
