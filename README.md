@@ -1,6 +1,6 @@
 # OSS Image Models Lab
 
-> 🤖 **AI task worker / agent：动手前先读 [`AGENTS.md`](AGENTS.md) 和 [`docs/RUNBOOK.md`](docs/RUNBOOK.md)**，里面是已验证的区域/AMI/模型 id/生成参数和踩坑清单。用 `scripts/launch.py` → `scripts/box_env.sh` → `scripts/gen.py` → `scripts/teardown.py` 这套验证过的流程，**不要重新猜测或从零试错**。
+> 🤖 **AI task worker / agent：动手前先读 [`AGENTS.md`](AGENTS.md) 和 [`docs/DEPLOY_MODEL_RUNBOOK.md`](docs/DEPLOY_MODEL_RUNBOOK.md)**，里面是已验证的区域/AMI/模型 id/生成参数和踩坑清单。用 `scripts/launch.py` → `scripts/box_env.sh` → `scripts/gen.py` → `scripts/teardown.py` 这套验证过的流程，**不要重新猜测或从零试错**。
 
 一个用于**测试开源生图模型**的实验仓库，以 AWS GPU 实例按需启停的方式运行，面向"**要高质量、但不需要 7×24**"的使用场景。
 
