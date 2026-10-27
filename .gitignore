@@ -42,3 +42,5 @@ venv/
 
 # logs
 *.log
+assets/hi3d/pipelines/normal.png
+assets/hi3d/pipelines/ao.png

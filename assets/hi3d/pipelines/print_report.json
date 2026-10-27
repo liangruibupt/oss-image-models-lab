@@ -1,0 +1,35 @@
+{
+  "input": "/home/ubuntu/refined_1536.glb",
+  "output": "/home/ubuntu/out_stl/figurine.stl",
+  "before": {
+    "vertices": 997124,
+    "faces": 1999999,
+    "watertight": false,
+    "winding_consistent": true,
+    "boundary_edges_holes": 285,
+    "components": 1436,
+    "volume_mm3_or_units3": 0.7092,
+    "is_volume": false,
+    "bbox": [
+      1.1949,
+      1.7388,
+      0.8946
+    ]
+  },
+  "after": {
+    "vertices": 500749,
+    "faces": 1011070,
+    "watertight": true,
+    "winding_consistent": true,
+    "boundary_edges_holes": 0,
+    "components": 1,
+    "volume_mm3_or_units3": 4664274.2917,
+    "is_volume": true,
+    "bbox": [
+      221.0,
+      321.0,
+      166.0
+    ]
+  },
+  "verdict": "PRINTABLE"
+}

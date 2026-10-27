@@ -1,0 +1,11 @@
+{
+  "input": "/home/ubuntu/refined_1536.glb",
+  "high_faces": 1998806,
+  "low_faces": 40000,
+  "decimate_ratio": 0.02001,
+  "has_uv": true,
+  "tex_size": 2048,
+  "low_glb": "/home/ubuntu/out_game/low_poly_baked.glb",
+  "normal_map": "/home/ubuntu/out_game/normal.png",
+  "ao_map": "/home/ubuntu/out_game/ao.png"
+}
