@@ -6,6 +6,8 @@
 
 首发支持 **Qwen-Image-2.1**（7B 统一文生图 + 图像编辑，原生透明 PNG）与 **Z-Image**（6B，Apache 2.0 可商用），并提供两者的**横向对比**（见下）。架构可扩展到其它开源模型（FLUX、SD3.5、Qwen-Image 系列等）。
 
+此外还评测了 **3D 几何模型 Hi3D v1.0**（图像 → 高精度 3D 几何细化，基于 Sparc3D）——见下方 [🧊 Hi3D v1.0 评测](#-hi3d-v10图像--3d-几何细化)。
+
 > ⚠️ **许可证提醒**：Qwen-Image-2.1 以 **Qwen Research License** 发布，**默认禁止商业用途**，商用需另向 Qwen 申请商业授权；**Z-Image 为 Apache 2.0，可免费商用**。本仓库代码仅用于研究/评估/内部测试。
 
 ---
@@ -24,6 +26,26 @@
 **完整对比（规格表 + 实测数据 + 选型决策表）见 [`docs/COMPARISON_zimage-vs-qwen-image-2.1.md`](docs/COMPARISON_zimage-vs-qwen-image-2.1.md)。**
 
 一句话：要透明/编辑/2K 选 Qwen-Image 2.1；要可商用/低成本纯文生图选 Z-Image。
+
+---
+
+## 🧊 Hi3D v1.0（图像 → 3D 几何细化）
+
+除 2D 生图外，本仓库评测了 3D 几何模型 **Hi3D v1.0**（[GitHub](https://github.com/hi3d-official/Hi3Dv1.0) · [权重](https://huggingface.co/hi3d-official/Hi3Dv1.0) · [在线体验](https://huggingface.co/spaces/ilcve21/Sparc3D)）。
+
+**它不是文生图，而是"粗网格 → 高精度几何细化"模型（基于 Sparc3D，只出几何、无纹理/材质）**，需要上游粗生成器（demo 用 Tencent Hunyuan3D-2 mini）先出 coarse mesh。
+
+**核心结论：48GB 的 L40S 即可跑满 512/1024/1536 全部三档，不需要官方说的 96GB H20。** 配 `sequential_cpu_offload` 峰值显存仅 ~15GB。
+
+| 档位 | 峰值显存 | 耗时 | 网格（顶点/面） |
+|---|---|---|---|
+| 512³ | 5.1 GB | ~588 s（含下权重） | 495K / 1.0M |
+| 1024³ | 15.6 GB | ~500 s | 496K / 1.0M |
+| 1536³ | 14.7 GB | ~642 s | 997K / 2.0M |
+
+细化逐级增加几何细节（发丝成块 → 单根纤维级、针织罗纹出现并锐化、五官/配饰更清晰）。**完整评测（显存/耗时表 + 法线三视图效果图 + 踩坑与复现步骤）见 [`docs/HI3D_eval.md`](docs/HI3D_eval.md)**；脚本见 [`scripts/hi3d/`](scripts/hi3d/)、样图见 [`assets/hi3d/`](assets/hi3d/)。
+
+> ⚠️ **许可证**：Hi3D Open License 1.0，商用可以但有 MAU/营收阈值和 `Powered by Hi3D 1.0` 标注要求。
 
 ---
 
@@ -66,13 +88,15 @@ oss-image-models-lab/
 ├── tests/
 │   ├── prompts.jsonl          # 测试 prompt 清单（文生图 + 编辑）
 │   └── run_matrix.md          # 测试矩阵与期望产出
-├── assets/                    # 生成的样图资产（64 张，Qwen + Z-Image 并排对比）
+├── assets/                    # 生成的样图资产（64 张 2D 对比 + assets/hi3d/ 的 3D 三视图）
 └── docs/
     ├── SETUP.md               # 从零到出图完整步骤
     ├── COST.md                # 成本明细与省钱清单
     ├── COMPARISON_zimage-vs-qwen-image-2.1.md   # 🆚 Z-Image vs Qwen-Image 2.1 模型对比
+    ├── HI3D_eval.md           # 🧊 Hi3D v1.0（图像 → 3D 几何细化）评测
     └── MODELS.md              # 已测/待测开源模型与显存对照
 ```
+（3D 评测的脚本在 `scripts/hi3d/`，样图在 `assets/hi3d/`。）
 
 ---
 
@@ -107,7 +131,7 @@ cd ~/oss-image-models-lab && ./scripts/setup-comfyui.sh
 
 ## 支持的模型
 
-已测：**Qwen-Image-2.1** 与 **Z-Image**（含横向对比，见 [`docs/COMPARISON_zimage-vs-qwen-image-2.1.md`](docs/COMPARISON_zimage-vs-qwen-image-2.1.md)）。显存对照与扩展方式见 [`docs/MODELS.md`](docs/MODELS.md)；欢迎按同样结构扩展其它开源模型。
+已测：**Qwen-Image-2.1** 与 **Z-Image**（含横向对比，见 [`docs/COMPARISON_zimage-vs-qwen-image-2.1.md`](docs/COMPARISON_zimage-vs-qwen-image-2.1.md)），以及 3D 几何模型 **Hi3D v1.0**（见 [`docs/HI3D_eval.md`](docs/HI3D_eval.md)）。显存对照与扩展方式见 [`docs/MODELS.md`](docs/MODELS.md)；欢迎按同样结构扩展其它开源模型。
 
 ## 成本
 
