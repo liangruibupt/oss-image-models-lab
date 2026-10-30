@@ -222,6 +222,7 @@ Hi3D 把“从图到高精度几何”这一步自动化了：**越是只要几�
 `decimate` 是**自动重拓扑的替身**，不是干净四边形拓扑——出货资产通常仍要
 手工 / ZRemesher 做 quad retopo；但**法线烘焙能让低模在光照下“看起来像”高模**，这一步 Hi3D 自己给不了。
 另外**贴图只有几何派生的 normal/AO，没有 albedo/颜色**（Hi3D 无纹理）——要带色需接 Hunyuan3D-2 的 paint 模块或手绘。
+→ 本文档 [附录 C](#附录-c给-hi3d-游戏低模补颜色贴图hunyuan3d-2-paint实测) 已把 Hunyuan Paint 补色端到端跑通。
 
 跑法：`blender --background --python scripts/hi3d/blender_retopo_bake.py -- refined_1536.glb out_game 40000 2048`
 （Blender 从官方 tarball 装，无需 sudo；无头烘焙还需 `libxxf86vm1 libxi6 libxrender1 libgl1` 等 X11/GL 运行库）。
@@ -230,3 +231,45 @@ Hi3D 把“从图到高精度几何”这一步自动化了：**越是只要几�
 <img src="../assets/hi3d/pipelines/pipelines_overview.png" width="900">
 
 
+
+---
+
+## 附录 C：给 Hi3D 游戏低模补颜色贴图（Hunyuan3D-2 Paint，实测）
+
+承接附录 B：附录 B 的法线/AO 烘焙解决了“低模看起来像高模”，但**没有颜色**。这一步用
+**Hunyuan3D-2 Paint（texgen）** 给几何补 **albedo 彩色贴图**——它从多视角渲染网格、用参考图做
+视角一致的扩散、再把结果烘进 UV 贴图，得到**带色的 glb**。脚本 [`scripts/hi3d/paint_mesh.py`](../scripts/hi3d/paint_mesh.py)。
+
+实测（输入 = `refined_1024.glb`，条件图 = 原始参考图）：
+
+| 指标 | 值 |
+|---|---|
+| painter | `hy3dgen.texgen.Hunyuan3DPaintPipeline`（`hunyuan3d-paint-v2-0`，1.3B） |
+| 上色网格 | **42,109 面**（见下方“关键坑”） |
+| UV | ✅ 自带（75,782 uv 坐标） |
+| albedo 贴图 | ✅ **2048×2048 RGB** baseColorTexture |
+| 输出 | `painted_1024.glb`（3.9MB，带贴图） + `albedo_1024.png` |
+| 上色耗时 | **221s**（权重已缓存时） |
+
+<img src="../assets/hi3d/paint/painted_preview.png" width="900">
+
+彩色渲染（前 / 3-4 / 侧）：肤色、黑色长发、棕色针织背心、琥珀色串珠手镯、吊坠项链、五官都被
+合理上色。**诚实的局限**：参考图是**正面单图**，所以**侧/背面信息少、偏暗**（单图 paint 的固有短板，
+要全向更准需多视角参考图或手补）；低模 42K 面的**刻面**在轮廓处可见。
+
+<img src="../assets/hi3d/paint/albedo_thumb.png" width="320">
+
+烘出的 2048² **albedo UV 图集**（碎片是 UV 展开后的纹理岛，正常）。
+
+**关键坑（已修进脚本）**：直接把 Hi3D 的**原始高模（~100 万面、非流形“三角汤”）**喂给 paint 会
+**卡死**——paint 的 UV 展开（xatlas）+ 栅格化烘焙是 **CPU 步骤**，在超密非流形网格上会无限自旋
+（实测 **100% CPU / 0% GPU、显存冻结、9+ 小时零产出**）。修法：上色前先过 Hunyuan 自带的
+`FloaterRemover + DegenerateFaceRemover + FaceReducer` **清理并减面到 ~40K**（这也正好对应“游戏低模”），
+之后 paint 几分钟即完成。
+
+跑法：`python scripts/hi3d/paint_mesh.py refined_1024.glb ref.png painted.glb 40000`
+（需先装 texgen 的两个 CUDA 扩展 custom_rasterizer + differentiable_renderer，见 [`scripts/hi3d/paint_env.sh`](../scripts/hi3d/paint_env.sh)，
+以及运行期 `xatlas / omegaconf / pygltflib`）。
+
+**到此，游戏资产链路补齐**：Hi3D 出高精度几何 → Blender 减面 + UV + 法线/AO 烘焙 → Hunyuan Paint 补 albedo 彩色，
+得到一个**带色 + 带法线、面数可控**的游戏可用资产。仍需的人工环节只剩 **quad retopo（可选）和骨骼绑定**。
