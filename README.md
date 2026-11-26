@@ -49,6 +49,21 @@
 
 ---
 
+## 🎬 Sand.ai MAGI-2（音视频生成，调研）
+
+[Sand.ai](https://sand.ai) 的 MAGI-2 是同时生成视频和音频的 MoE 模型。**本仓库尚未实测**，调研笔记见 [`docs/MAGI2_sandai.md`](docs/MAGI2_sandai.md)。
+
+| | MAGI-2 Preview | MAGI-2 旗舰版 |
+|---|---|---|
+| 发布 / 开源 | 2026-08-05，✅ 已开源（Apache 2.0） | 2026-11-24，❌ 暂未开源（官方称即将开源） |
+| 参数 | 114B（激活 6B） | 480B（激活 28B） |
+| 输出 | 文/图生视频 + 同步音频，10 秒 1080p | 最长 30 秒 1080p 25fps，多参考输入（最多 20 个）+ 视频编辑 |
+| 部署 | 权重约 307GB，**需 8×Hopper**（AWS p5/p5e），未蒸馏需 100+5 步 | 目前仅 API |
+
+一句话：已开源的 Preview 跑不进本仓库的单卡 g6e，建议等蒸馏版或旗舰版开源后再实测。
+
+---
+
 ## 为什么是这套方案
 
 | 需求 | 方案 |
@@ -94,6 +109,7 @@ oss-image-models-lab/
     ├── COST.md                # 成本明细与省钱清单
     ├── COMPARISON_zimage-vs-qwen-image-2.1.md   # 🆚 Z-Image vs Qwen-Image 2.1 模型对比
     ├── HI3D_eval.md           # 🧊 Hi3D v1.0（图像 → 3D 几何细化）评测
+    ├── MAGI2_sandai.md        # 🎬 Sand.ai MAGI-2 音视频生成模型调研（未实测）
     └── MODELS.md              # 已测/待测开源模型与显存对照
 ```
 （3D 评测的脚本在 `scripts/hi3d/`，样图在 `assets/hi3d/`。）
@@ -131,7 +147,7 @@ cd ~/oss-image-models-lab && ./scripts/setup-comfyui.sh
 
 ## 支持的模型
 
-已测：**Qwen-Image-2.1** 与 **Z-Image**（含横向对比，见 [`docs/COMPARISON_zimage-vs-qwen-image-2.1.md`](docs/COMPARISON_zimage-vs-qwen-image-2.1.md)），以及 3D 几何模型 **Hi3D v1.0**（见 [`docs/HI3D_eval.md`](docs/HI3D_eval.md)）。显存对照与扩展方式见 [`docs/MODELS.md`](docs/MODELS.md)；欢迎按同样结构扩展其它开源模型。
+已测：**Qwen-Image-2.1** 与 **Z-Image**（含横向对比，见 [`docs/COMPARISON_zimage-vs-qwen-image-2.1.md`](docs/COMPARISON_zimage-vs-qwen-image-2.1.md)），以及 3D 几何模型 **Hi3D v1.0**（见 [`docs/HI3D_eval.md`](docs/HI3D_eval.md)）。调研未实测：音视频生成模型 **Sand.ai MAGI-2**（见 [`docs/MAGI2_sandai.md`](docs/MAGI2_sandai.md)）。显存对照与扩展方式见 [`docs/MODELS.md`](docs/MODELS.md)；欢迎按同样结构扩展其它开源模型。
 
 ## 成本
 
