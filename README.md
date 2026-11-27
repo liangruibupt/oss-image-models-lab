@@ -4,6 +4,8 @@
 
 一个用于**测试开源生图模型**的实验仓库，以 AWS GPU 实例按需启停的方式运行，面向"**要高质量、但不需要 7×24**"的使用场景。
 
+> 🔗 姊妹仓库：开源 **LLM** 在 SGLang / vLLM / TrnRT / vLLM-Omni / DeepInfer 上的支持矩阵、实践与性能对比见 [oss-llm-models-lab](https://github.com/liangruibupt/oss-llm-models-lab)。
+
 首发支持 **Qwen-Image-2.1**（7B 统一文生图 + 图像编辑，原生透明 PNG）与 **Z-Image**（6B，Apache 2.0 可商用），并提供两者的**横向对比**（见下）。架构可扩展到其它开源模型（FLUX、SD3.5、Qwen-Image 系列等）。
 
 此外还评测了 **3D 几何模型 Hi3D v1.0**（图像 → 高精度 3D 几何细化，基于 Sparc3D）——见下方 [🧊 Hi3D v1.0 评测](#-hi3d-v10图像--3d-几何细化)。
