@@ -79,6 +79,23 @@
 
 ---
 
+## ⚙️ 推理框架支持
+
+调研了 5 个推理框架对本仓库模型的支持情况（checked 2026-11-27），以 Diffusers / ComfyUI 为基线。**完整矩阵、起服务命令、已公布性能数字和选型建议见 [`docs/INFERENCE_FRAMEWORKS.md`](docs/INFERENCE_FRAMEWORKS.md)。**
+
+| 模型 | [SGLang](https://github.com/sgl-project/sglang) | [vLLM](https://github.com/vllm-project/vllm) | [TrnRT](https://github.com/RunanywhereAI/trnrt) | [vLLM-Omni](https://github.com/vllm-project/vllm-omni) | [DeepInfer](https://github.com/deepseek-ai/DeepInfer) | Diffusers | ComfyUI |
+|---|---|---|---|---|---|---|---|
+| Qwen-Image-2.1（+Turbo） | ✅ | ➖ | ➖ | ✅ | ➖ | ✅ | ✅ |
+| Z-Image / Turbo | ✅ | ➖ | ➖ | ✅ | ➖ | ✅ | ✅ |
+| Hi3D v1.0（+Hunyuan3D-2） | 🟡 仅 Hunyuan3D-2 | ➖ | ➖ | ❌ | ➖ | ❌ | 🟡 仅 Hunyuan3D-2 |
+| MAGI-2 Preview | ✅（仅 main） | ➖ | ➖ | ✅（无 1080p refiner） | ➖ | ❌ | ❌ |
+
+✅ 官方支持　🟡 部分支持　❌ 不支持　➖ 不适用（vLLM / TrnRT / DeepInfer 是文本 LLM 引擎）。
+
+一句话：要把出图做成 OpenAI 兼容服务，选 **vLLM-Omni** 或 **SGLang Diffusion**；单卡批量对比继续用 Diffusers。本仓库在 L40S 上的同口径实测见 [`docs/BENCH_image_frameworks.md`](docs/BENCH_image_frameworks.md)。
+
+---
+
 ## 仓库结构
 
 ```
@@ -112,6 +129,7 @@ oss-image-models-lab/
     ├── COMPARISON_zimage-vs-qwen-image-2.1.md   # 🆚 Z-Image vs Qwen-Image 2.1 模型对比
     ├── HI3D_eval.md           # 🧊 Hi3D v1.0（图像 → 3D 几何细化）评测
     ├── MAGI2_sandai.md        # 🎬 Sand.ai MAGI-2 音视频生成模型调研（未实测）
+    ├── INFERENCE_FRAMEWORKS.md # ⚙️ 推理框架（SGLang / vLLM / TrnRT / vLLM-Omni / DeepInfer）支持矩阵与实践
     └── MODELS.md              # 已测/待测开源模型与显存对照
 ```
 （3D 评测的脚本在 `scripts/hi3d/`，样图在 `assets/hi3d/`。）
@@ -149,7 +167,7 @@ cd ~/oss-image-models-lab && ./scripts/setup-comfyui.sh
 
 ## 支持的模型
 
-已测：**Qwen-Image-2.1** 与 **Z-Image**（含横向对比，见 [`docs/COMPARISON_zimage-vs-qwen-image-2.1.md`](docs/COMPARISON_zimage-vs-qwen-image-2.1.md)），以及 3D 几何模型 **Hi3D v1.0**（见 [`docs/HI3D_eval.md`](docs/HI3D_eval.md)）。调研未实测：音视频生成模型 **Sand.ai MAGI-2**（见 [`docs/MAGI2_sandai.md`](docs/MAGI2_sandai.md)）。显存对照与扩展方式见 [`docs/MODELS.md`](docs/MODELS.md)；欢迎按同样结构扩展其它开源模型。
+已测：**Qwen-Image-2.1** 与 **Z-Image**（含横向对比，见 [`docs/COMPARISON_zimage-vs-qwen-image-2.1.md`](docs/COMPARISON_zimage-vs-qwen-image-2.1.md)），以及 3D 几何模型 **Hi3D v1.0**（见 [`docs/HI3D_eval.md`](docs/HI3D_eval.md)）。调研未实测：音视频生成模型 **Sand.ai MAGI-2**（见 [`docs/MAGI2_sandai.md`](docs/MAGI2_sandai.md)）。显存对照与扩展方式见 [`docs/MODELS.md`](docs/MODELS.md)；各模型在 SGLang / vLLM-Omni 等推理框架上的支持情况见 [`docs/INFERENCE_FRAMEWORKS.md`](docs/INFERENCE_FRAMEWORKS.md)；欢迎按同样结构扩展其它开源模型。
 
 ## 成本
 

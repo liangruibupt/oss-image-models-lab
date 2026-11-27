@@ -44,6 +44,9 @@
 | Sand.ai MAGI-2 Preview | 文/图生视频 + 同步音频，10 秒 1080p | **Apache-2.0** | 114B MoE（激活 6B），权重约 307GB，需 8×Hopper（AWS p5/p5e）。调研笔记见 [`MAGI2_sandai.md`](MAGI2_sandai.md) |
 | Sand.ai MAGI-2（旗舰） | 音视频生成，30 秒 1080p，多参考 + 编辑 | 未开源 | 480B MoE（激活 28B），2026-11-24 发布，官方称即将开源 |
 
+## 推理框架支持
+各模型在 SGLang、vLLM、TrnRT、vLLM-Omni、DeepInfer（及 Diffusers / ComfyUI 基线）上的支持矩阵与起服务命令见 [`INFERENCE_FRAMEWORKS.md`](INFERENCE_FRAMEWORKS.md)。
+
 ## 如何新增一个模型
 1. 在 `comfyui/models.manifest.txt` 加上该模型的 HF 仓库 + 文件 + 目标目录。
 2. 在 `workflows/` 加一个该模型的 API 格式工作流 JSON。
